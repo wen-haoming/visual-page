@@ -1,0 +1,21 @@
+{
+  "name": "ctx-render",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "cd packages/editer && pnpm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wen-haoming/ctx-render.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wen-haoming/ctx-render/issues"
+  },
+  "homepage": "https://github.com/wen-haoming/ctx-render#readme"
+}
