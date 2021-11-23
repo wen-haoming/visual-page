@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
   "scripts": {
-    "start": "cd packages/editer && pnpm start"
+    "dev":"run-p start:**",
+    "start:editer": "cd packages/editer && pnpm start",
+    "start:components": "cd packages/components && pnpm start"
   },
   "repository": {
     "type": "git",
