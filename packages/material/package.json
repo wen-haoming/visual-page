@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name":"@ctx-render/components",
+  "name":"@visual-build/material",
   "scripts": {
     "start": "umi dev",
     "build": "umi build",

@@ -9,7 +9,7 @@
   "scripts": {
     "dev":"run-p start:**",
     "start:editer": "cd packages/editer && pnpm start",
-    "start:components": "cd packages/components && pnpm start"
+    "start:components": "cd packages/material && pnpm start"
   },
   "repository": {
     "type": "git",

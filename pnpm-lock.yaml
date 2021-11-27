@@ -39,11 +39,13 @@ importers:
 
   packages/editer:
     specifiers:
+      '@ant-design/icons': ^4.7.0
       '@ant-design/pro-layout': ^6.5.0
       '@types/react': ^17.0.0
       '@types/react-dom': ^17.0.0
       '@umijs/preset-react': 1.x
       '@umijs/test': ^3.5.20
+      classnames: ^2.3.1
       lint-staged: ^10.0.7
       prettier: ^2.2.0
       react: 17.x
@@ -52,14 +54,16 @@ importers:
       umi: ^3.5.20
       yorkie: ^2.0.0
     dependencies:
+      '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
       '@ant-design/pro-layout': 6.31.2_react-dom@17.0.2+react@17.0.2
+      classnames: 2.3.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       umi: 3.5.20
     devDependencies:
       '@types/react': 17.0.36
       '@types/react-dom': 17.0.11
-      '@umijs/preset-react': 1.8.30_b0091c0d4ad236b666154d8194d5eba2
+      '@umijs/preset-react': 1.8.30_0ed8a3609927edf5ec633642c6a1a367
       '@umijs/test': 3.5.20
       lint-staged: 10.5.4
       prettier: 2.4.1
@@ -447,7 +451,7 @@ packages:
       regenerator-runtime: 0.13.9
 
   /@babel/runtime/7.16.3:
-    resolution: {integrity: sha512-WBwekcqacdY2e9AF/Q7WLFUWmdJGJTkbjqTjoMDgXkVZ3ZRUvOPsLb5KdwISoQVsbP+DQzVZW4Zhci0DvpbNTQ==, tarball: '@babel/runtime/download/@babel/runtime-7.16.3.tgz'}
+    resolution: {integrity: sha512-WBwekcqacdY2e9AF/Q7WLFUWmdJGJTkbjqTjoMDgXkVZ3ZRUvOPsLb5KdwISoQVsbP+DQzVZW4Zhci0DvpbNTQ==, tarball: '@babel/runtime/download/@babel/runtime-7.16.3.tgz?cache=0&sync_timestamp=1636501703701&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.16.3.tgz'}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
@@ -1271,6 +1275,31 @@ packages:
       umi: 3.5.20
     dev: true
 
+  /@umijs/plugin-layout/0.18.1_61c3cc6359bf0522f69f346d2ad4ebc4:
+    resolution: {integrity: sha512-15YTcFpic0v15nFzlg6G8nvMCveBtcBL77Wr9wXYJdgR0iU7dnO7T4OqbLwgEc1uHxtGhTVibi6nSGelX56zCg==, tarball: '@umijs/plugin-layout/download/@umijs/plugin-layout-0.18.1.tgz'}
+    peerDependencies:
+      '@ant-design/icons': ^4.0.0
+      '@ant-design/pro-layout': ^6.0.0
+      '@umijs/plugin-initial-state': 2.x
+      '@umijs/plugin-locale': 0.x
+      '@umijs/plugin-model': 2.x
+      umi: 3.x
+    dependencies:
+      '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
+      '@ant-design/pro-layout': 6.31.2_react-dom@17.0.2+react@17.0.2
+      '@umijs/plugin-initial-state': 2.4.0_umi@3.5.20
+      '@umijs/plugin-locale': 0.15.1_13df21c36e85c2f1f9d1dedf051c4a7e
+      '@umijs/plugin-model': 2.6.2_umi@3.5.20
+      '@umijs/route-utils': 2.0.4
+      antd: 4.17.1_react-dom@17.0.2+react@17.0.2
+      lodash: 4.17.21
+      path-to-regexp: 1.8.0
+      umi: 3.5.20
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: true
+
   /@umijs/plugin-layout/0.18.1_b264d06b148bdaab7e683440ca469d8d:
     resolution: {integrity: sha512-15YTcFpic0v15nFzlg6G8nvMCveBtcBL77Wr9wXYJdgR0iU7dnO7T4OqbLwgEc1uHxtGhTVibi6nSGelX56zCg==, tarball: '@umijs/plugin-layout/download/@umijs/plugin-layout-0.18.1.tgz'}
     peerDependencies:
@@ -1383,6 +1412,40 @@ packages:
     transitivePeerDependencies:
       - react-dom
     dev: false
+
+  /@umijs/preset-react/1.8.30_0ed8a3609927edf5ec633642c6a1a367:
+    resolution: {integrity: sha512-l+l5r+x9cyqNxbtmUNqoibfV9UK/daiD2HjFiTql3wyKzR6cEIq+h8RQ+ehO9DmzU8Tu5LPRimT97MuOsMciOQ==, tarball: '@umijs/preset-react/download/@umijs/preset-react-1.8.30.tgz'}
+    peerDependencies:
+      umi: 3.x
+    dependencies:
+      '@umijs/plugin-access': 2.4.2_8fdd92e27c996e3efc753a2a773be7d5
+      '@umijs/plugin-analytics': 0.2.2_umi@3.5.20
+      '@umijs/plugin-antd': 0.13.0_13df21c36e85c2f1f9d1dedf051c4a7e
+      '@umijs/plugin-crossorigin': 1.2.1_umi@3.5.20
+      '@umijs/plugin-dva': 0.13.0_13df21c36e85c2f1f9d1dedf051c4a7e
+      '@umijs/plugin-helmet': 1.1.3_react@17.0.2+umi@3.5.20
+      '@umijs/plugin-initial-state': 2.4.0_umi@3.5.20
+      '@umijs/plugin-layout': 0.18.1_61c3cc6359bf0522f69f346d2ad4ebc4
+      '@umijs/plugin-locale': 0.15.1_13df21c36e85c2f1f9d1dedf051c4a7e
+      '@umijs/plugin-model': 2.6.2_umi@3.5.20
+      '@umijs/plugin-request': 2.8.0_react@17.0.2+umi@3.5.20
+      '@umijs/plugin-test': 1.0.2_umi@3.5.20
+      umi: 3.5.20
+    transitivePeerDependencies:
+      - '@ant-design/icons'
+      - '@ant-design/pro-layout'
+      - bufferutil
+      - canvas
+      - dva-core
+      - react
+      - react-dom
+      - react-native
+      - react-router
+      - redbox-react
+      - supports-color
+      - ts-node
+      - utf-8-validate
+    dev: true
 
   /@umijs/preset-react/1.8.30_b0091c0d4ad236b666154d8194d5eba2:
     resolution: {integrity: sha512-l+l5r+x9cyqNxbtmUNqoibfV9UK/daiD2HjFiTql3wyKzR6cEIq+h8RQ+ehO9DmzU8Tu5LPRimT97MuOsMciOQ==, tarball: '@umijs/preset-react/download/@umijs/preset-react-1.8.30.tgz'}
