@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "editor",
   "scripts": {
     "start": "umi dev",
     "build": "umi build",
