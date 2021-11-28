@@ -4,22 +4,22 @@ import { Space } from 'antd';
 import { SwapLeftOutlined, SwapRightOutlined } from '@ant-design/icons';
 import SchemaRender from '@/schema-render';
 import { install } from '../defaultSetting';
-
-import './index.less';
 import { useDrop } from 'react-dnd';
 import { useStore } from '@/hooks';
+import './index.less';
 
 const Workspace = () => {
   const prefixCls = usePrefix('workspace');
   const { globalState } = useStore();
 
-  const [{ canDrop, isOver }, dropRef] = useDrop(() => ({
+  const [, dropRef] = useDrop(() => ({
     accept: 'component',
     drop: () => ({ name: 'Dustbin' }),
     collect: (monitor) => {
       return {
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
+        item: monitor.getItem(),
       };
     },
   }));

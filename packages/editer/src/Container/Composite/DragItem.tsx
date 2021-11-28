@@ -7,25 +7,28 @@ import { useStore } from '@/hooks';
 
 interface Props {
   itemData: Schema;
-  title:string
+  title: string;
 }
 
 const DragItem: FC<Props> = (props) => {
-  const {  itemData } = props;
+  const { itemData } = props;
   const prefixCls = usePrefix('composite');
-    const {changeSchema} = useStore()
+  const { changeSchema } = useStore();
 
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: 'component',
-      end(){
-        const newItemData = {...itemData}
-        Reflect.deleteProperty(newItemData,'comp')
-        Reflect.deleteProperty(newItemData,'componentNameCN')
-        
-        changeSchema((schemeArr)=>{
-            return [...schemeArr,newItemData]
-        })
+      item: 123,
+      end(item, monitor) {
+        if (monitor.didDrop()) {
+          const newItemData = { ...itemData };
+          Reflect.deleteProperty(newItemData, 'comp');
+          Reflect.deleteProperty(newItemData, 'componentNameCN');
+
+          changeSchema((schemeArr) => {
+            return [...schemeArr, newItemData];
+          });
+        }
       },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.5 : 1,
@@ -33,11 +36,21 @@ const DragItem: FC<Props> = (props) => {
     }),
     [],
   );
+
   return (
     <div
       className={`${prefixCls}-comp-box-item`}
       ref={dragRef}
       style={{ opacity }}
+      onClick={() => {
+        const newItemData = { ...itemData };
+        Reflect.deleteProperty(newItemData, 'comp');
+        Reflect.deleteProperty(newItemData, 'componentNameCN');
+
+        changeSchema((schemeArr) => {
+          return [...schemeArr, newItemData];
+        });
+      }}
     >
       <AppstoreOutlined style={{ fontSize: '20px', color: '#08c' }} />
       <div>{itemData.componentName}</div>
