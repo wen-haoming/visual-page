@@ -1,8 +1,9 @@
 @import '../../styles/variables.less';
 
 .@{prefix-cls}-workspace {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-
     &-h {
         display: flex;
         height: 30px;
@@ -23,5 +24,11 @@
                 background-color: var(--vb-white-gray-lighter);
             }
         }
+    }
+    &-viewport{
+        flex:1;
+        border: 5px solid var(--vb-white-gray-lighter);
+        margin-bottom: 10px;
+        overflow-y: auto;
     }
 }

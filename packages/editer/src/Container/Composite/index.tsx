@@ -56,7 +56,6 @@ const Header = () => {
                             <div>组件4</div>
                         </div>
                     </div>
-
                 </Panel>
                 <Panel header="远程组件" key="2" className={`${prefixCls}-comp-collapse-panel`}>
                     <div className={`${prefixCls}-comp-box`}>
