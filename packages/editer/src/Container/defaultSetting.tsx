@@ -1,29 +1,29 @@
 import { Button, Input, Select } from 'antd';
-import { Schema, Install } from '@/schemaRender';
+import { Schema, Install } from '@/schema-render';
+
 const { Option } = Select;
 
-export const schema: Schema[] = [
-  {
-    componentName: 'Button',
+export const schema: Schema[] = [];
+
+export const install: Install = {
+  Button: {
+    comp: Button,
+    componentNameCN: '按钮组件',
     props: {
       type: 'primary',
-      children: '按钮组件',
+      children: 'Basic usage1',
     },
   },
-  {
-    componentName: 'Input',
-    props: {
-      placeholder: 'Basic usage',
-    },
-  },
-  {
-    componentName: 'Input',
+  Input: {
+    comp: Input,
+    componentNameCN: '输入组件',
     props: {
       placeholder: 'Basic usage2',
     },
   },
-  {
-    componentName: 'Select',
+  Select: {
+    comp: Select,
+    componentNameCN: '选择组件',
     props: {
       children: (
         <>
@@ -38,17 +38,5 @@ export const schema: Schema[] = [
         width: 200,
       },
     },
-  },
-];
-
-export const install: Install = {
-  Button: {
-    comp: Button,
-  },
-  Input: {
-    comp: Input,
-  },
-  Select: {
-    comp: Select,
   },
 };

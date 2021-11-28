@@ -10,6 +10,7 @@ export interface Schema {
   children?: Schema[] | string | number;
   [key: string]: any;
 }
+
 export type Install  = CompRenderProps['install']
 
 interface Props {

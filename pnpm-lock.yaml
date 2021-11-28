@@ -50,6 +50,7 @@ importers:
       prettier: ^2.2.0
       react: 17.x
       react-dnd: ^14.0.4
+      react-dnd-html5-backend: ^14.0.2
       react-dom: 17.x
       typescript: ^4.1.2
       umi: ^3.5.20
@@ -60,6 +61,7 @@ importers:
       classnames: 2.3.1
       react: 17.0.2
       react-dnd: 14.0.4_bb8e79a4a12a744c3dc48cdef194d579
+      react-dnd-html5-backend: 14.0.2
       react-dom: 17.0.2_react@17.0.2
       umi: 3.5.20
     devDependencies:
@@ -6829,6 +6831,12 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     dev: true
+
+  /react-dnd-html5-backend/14.0.2:
+    resolution: {integrity: sha1-JQGTiPar3u2jpv6oNd/xVauyCFw=, tarball: react-dnd-html5-backend/download/react-dnd-html5-backend-14.0.2.tgz}
+    dependencies:
+      dnd-core: 14.0.1
+    dev: false
 
   /react-dnd/14.0.4_bb8e79a4a12a744c3dc48cdef194d579:
     resolution: {integrity: sha1-/7TqDio6VTL5xilNVldCAIpSuLA=, tarball: react-dnd/download/react-dnd-14.0.4.tgz}
