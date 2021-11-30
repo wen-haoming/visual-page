@@ -18,7 +18,6 @@ const DragItem: FC<Props> = (props) => {
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: 'component',
-      item: 123,
       end(item, monitor) {
         if (monitor.didDrop()) {
           const newItemData = { ...itemData };

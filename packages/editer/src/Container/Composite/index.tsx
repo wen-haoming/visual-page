@@ -13,6 +13,7 @@ import './index.less';
 
 const { Panel } = Collapse;
 import { install } from '../defaultSetting';
+import { uid } from '@/utils';
 
 const Header = () => {
   const prefixCls = usePrefix('composite');
@@ -67,7 +68,7 @@ const Header = () => {
                   <DragItem
                     key={key.toString()}
                     title={val.componentNameCN}
-                    itemData={{ componentName: key, ...val }}
+                    itemData={{ componentName: key, id: uid(), ...val }}
                   />
                 );
               })}

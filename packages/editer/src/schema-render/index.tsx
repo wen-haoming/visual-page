@@ -1,3 +1,4 @@
+import { usePrefix } from '@/hooks';
 import { getAttributeNode } from '@/utils';
 import {
   FC,
@@ -8,9 +9,11 @@ import {
   useRef,
 } from 'react';
 import CompRender, { CompRenderProps } from './CompRender';
-
+import Insertion from './Insertion';
+import './index.less';
 export interface Schema {
   componentName: string;
+  id: string;
   props?: {
     children?: ReactChildren | string | ReactElement;
     [key: string]: any;
@@ -29,56 +32,38 @@ interface Props {
 
 const SchemaRender: FC<Props> = (props) => {
   const { schema, install } = props;
-  const innerWrapperRef = useRef<HTMLDivElement>(null);
-  const previosTargetRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const mousemove = (e: HTMLElementEventMap['mousemove']) => {
-      if (!innerWrapperRef.current?.contains(e.target)) return;
-
-      const targetNode = getAttributeNode(e.target, 'data-v-schema-idx');
-
-      if (targetNode && previosTargetRef.current !== targetNode) {
-        previosTargetRef.current?.classList.remove('inspect');
-        targetNode.classList.add('inspect');
-        previosTargetRef.current = targetNode;
-        console.log(targetNode);
-      }
-    };
-
-    const mouseleave = () => {
-      previosTargetRef.current?.classList.remove('inspect');
-    };
-
-    document.addEventListener('mousemove', mousemove);
-    return () => {
-      document.removeEventListener('mousemove', mousemove);
-    };
-  }, []);
+  const prefixCls = usePrefix('schema-render');
 
   return (
-    <div ref={innerWrapperRef}>
-      {schema.map((comp, idx) => {
-        if (comp?.props?.children && Array.isArray(comp?.props?.children)) {
+    <>
+      <div className={prefixCls}>
+        {schema.map((schemaItem, idx) => {
+          if (
+            schemaItem?.props?.children &&
+            Array.isArray(schemaItem?.props?.children)
+          ) {
+            return (
+              <SchemaRender
+                key={idx.toString()}
+                schema={schemaItem.props.children}
+                install={install}
+              />
+            );
+          }
           return (
-            <SchemaRender
-              key={idx.toString()}
-              schema={comp.props.children}
+            <CompRender
+              key={schemaItem.id}
               install={install}
+              componentName={schemaItem.componentName}
+              idx={idx}
+              id={schemaItem.id}
+              props={schemaItem.props}
             />
           );
-        }
-        return (
-          <CompRender
-            key={idx.toString()}
-            install={install}
-            componentName={comp.componentName}
-            idx={idx}
-            props={comp.props}
-          />
-        );
-      })}
-    </div>
+        })}
+      </div>
+      <Insertion canvasClassName={prefixCls}  />
+    </>
   );
 };
 

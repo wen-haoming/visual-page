@@ -5,6 +5,7 @@ type RE = FC | ComponentClass;
 
 export interface CompRenderProps {
   componentName: string;
+  id: string;
   props?: any;
   idx: number;
   install: {
@@ -17,57 +18,60 @@ export interface CompRenderProps {
 }
 
 const CompRender: FC<CompRenderProps> = (CompRenderProps) => {
-  const { componentName, install, idx, props = {} } = CompRenderProps;
+  const { componentName, install, idx, id, props = {} } = CompRenderProps;
 
   const Ele = install[componentName].comp;
   const ref = useRef(null);
   const { changeSchema } = useStore();
 
-  const [{ handlerId }, drop] = useDrop({
-    accept: 'ele',
-    collect(monitor) {
-      return {
-        handlerId: monitor.getHandlerId(),
-      };
-    },
-    hover(item, monitor) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
-      const hoverIndex = idx;
-      // Determine rectangle on screen
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-      // Get pixels to the top
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-      
-      changeSchema((scheme) => {
-        const hoverItem = scheme[dragIndex];
-        const currentItem = scheme[idx];
-        
-        scheme[dragIndex] = currentItem;
-        scheme[idx] = hoverItem;
+  const [{ handlerId }, drop] = useDrop(
+    {
+      accept: 'ele',
+      collect(monitor) {
+        return {
+          handlerId: monitor.getHandlerId(),
+        };
+      },
+      hover(item, monitor) {
+        if (!ref.current) {
+          return;
+        }
+        const dragIndex = item.index;
+        const hoverIndex = idx;
+        // Determine rectangle on screen
+        const hoverBoundingRect = ref.current?.getBoundingClientRect();
+        // Get vertical middle
+        const hoverMiddleY =
+          (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+        // Determine mouse position
+        const clientOffset = monitor.getClientOffset();
+        // Get pixels to the top
+        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+        // Only perform the move when the mouse has crossed half of the items height
+        // When dragging downwards, only move when the cursor is below 50%
+        // When dragging upwards, only move when the cursor is above 50%
+        // Dragging downwards
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+          return;
+        }
+        // Dragging upwards
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+          return;
+        }
 
-        return [...scheme];
-      });
+        changeSchema((scheme) => {
+          const hoverItem = scheme[dragIndex];
+          const currentItem = scheme[idx];
+
+          scheme[dragIndex] = currentItem;
+          scheme[idx] = hoverItem;
+
+          return [...scheme];
+        });
+      },
     },
-  },[]);
+    [],
+  );
 
   const [{ isDragging }, drag] = useDrag({
     type: 'ele',
@@ -89,10 +93,7 @@ const CompRender: FC<CompRenderProps> = (CompRenderProps) => {
 
   drag(drop(ref));
 
-
-  return (
-      <Ele {...props} data-v-schema-idx={idx} />
-  );
+  return <Ele {...props} data-schema-id={id} />;
 };
 
 export default memo(CompRender);
