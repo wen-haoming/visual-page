@@ -45,6 +45,7 @@ importers:
       '@types/react-dom': ^17.0.0
       '@umijs/preset-react': 1.x
       '@umijs/test': ^3.5.20
+      ahooks: ^2.10.12
       classnames: ^2.3.1
       lint-staged: ^10.0.7
       prettier: ^2.2.0
@@ -58,6 +59,7 @@ importers:
     dependencies:
       '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
       '@ant-design/pro-layout': 6.31.2_react-dom@17.0.2+react@17.0.2
+      ahooks: 2.10.12_react@17.0.2
       classnames: 2.3.1
       react: 17.0.2
       react-dnd: 14.0.4_bb8e79a4a12a744c3dc48cdef194d579
@@ -84,7 +86,6 @@ packages:
       lodash.debounce: 4.0.8
       lodash.throttle: 4.1.1
       react: 17.0.2
-    dev: true
 
   /@ant-design/colors/6.0.0:
     resolution: {integrity: sha1-m5NmJXz/zEfbQrnQIDu1ksE8Apg=, tarball: '@ant-design/colors/download/@ant-design/colors-6.0.0.tgz'}
@@ -946,6 +947,10 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
+  /@types/js-cookie/2.2.7:
+    resolution: {integrity: sha1-ImqeMWgINaYYjoh/OYjmDATT9qM=, tarball: '@types/js-cookie/download/@types/js-cookie-2.2.7.tgz'}
+    dev: false
+
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha1-l+3JA36gw4WFMgsolk3eOznkZg0=, tarball: '@types/json-schema/download/@types/json-schema-7.0.9.tgz'}
     dev: false
@@ -1710,6 +1715,25 @@ packages:
       clean-stack: 2.2.0
       indent-string: 4.0.0
     dev: true
+
+  /ahooks/2.10.12_react@17.0.2:
+    resolution: {integrity: sha1-6Mq2UwOUNCeeaVaag0LGArNUXas=, tarball: ahooks/download/ahooks-2.10.12.tgz}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      react: ^16.8.6 || ^17.0
+    dependencies:
+      '@ahooksjs/use-request': 2.8.13_react@17.0.2
+      '@types/js-cookie': 2.2.7
+      dayjs: 1.10.7
+      intersection-observer: 0.7.0
+      js-cookie: 2.2.1
+      lodash.debounce: 4.0.8
+      lodash.isequal: 4.5.0
+      lodash.throttle: 4.1.1
+      react: 17.0.2
+      resize-observer-polyfill: 1.5.1
+      screenfull: 5.2.0
+    dev: false
 
   /ajv-errors/1.0.1_ajv@6.12.6:
     resolution: {integrity: sha1-81mGrOuRr63sQQL72FAUlQzvpk0=, tarball: ajv-errors/download/ajv-errors-1.0.1.tgz}
@@ -2795,7 +2819,6 @@ packages:
 
   /dayjs/1.10.7:
     resolution: {integrity: sha1-LPX5Gt0oEWdIRAhmoKHSbzps5Gg=, tarball: dayjs/download/dayjs-1.10.7.tgz}
-    dev: true
 
   /debug/2.6.9:
     resolution: {integrity: sha1-XRKFFd8TT/Mn6QpMk/Tgd6U2NB8=, tarball: debug/download/debug-2.6.9.tgz}
@@ -3855,6 +3878,10 @@ packages:
       side-channel: 1.0.4
     dev: true
 
+  /intersection-observer/0.7.0:
+    resolution: {integrity: sha1-7ha+6XjbU1FurS8KgVSwm0ALvck=, tarball: intersection-observer/download/intersection-observer-0.7.0.tgz}
+    dev: false
+
   /intl-format-cache/4.3.1:
     resolution: {integrity: sha1-SE0xqYchYebAITk0myWaYimt43c=, tarball: intl-format-cache/download/intl-format-cache-4.3.1.tgz}
     dev: true
@@ -4768,6 +4795,10 @@ packages:
       - utf-8-validate
     dev: true
 
+  /js-cookie/2.2.1:
+    resolution: {integrity: sha1-aeEG3F1YBolFYpAqpbrsN0Tpsrg=, tarball: js-cookie/download/js-cookie-2.2.1.tgz}
+    dev: false
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha1-GSA/tZmR35jjoocFDUZHzerzJJk=, tarball: js-tokens/download/js-tokens-4.0.0.tgz}
 
@@ -5036,7 +5067,6 @@ packages:
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=, tarball: lodash.debounce/download/lodash.debounce-4.0.8.tgz}
-    dev: true
 
   /lodash.isequal/4.5.0:
     resolution: {integrity: sha1-QVxEePK8wwEgwizhDtMib30+GOA=, tarball: lodash.isequal/download/lodash.isequal-4.5.0.tgz}
@@ -5051,7 +5081,6 @@ packages:
 
   /lodash.throttle/4.1.1:
     resolution: {integrity: sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=, tarball: lodash.throttle/download/lodash.throttle-4.1.1.tgz}
-    dev: true
 
   /lodash/4.17.21:
     resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz}
@@ -7565,6 +7594,11 @@ packages:
       '@types/json-schema': 7.0.9
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
+    dev: false
+
+  /screenfull/5.2.0:
+    resolution: {integrity: sha1-ZTPVJNMGIfwSg7lpIUbz8TqT0bo=, tarball: screenfull/download/screenfull-5.2.0.tgz}
+    engines: {node: '>=0.10.0'}
     dev: false
 
   /scroll-into-view-if-needed/2.2.28:

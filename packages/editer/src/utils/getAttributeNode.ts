@@ -1,4 +1,7 @@
-export const getAttributeNode = (ele: HTMLElement | null, attribute: string):HTMLElement | null => {
+export const getAttributeNode = (
+  ele: HTMLElement | null,
+  attribute: string,
+): HTMLElement | null => {
   if (!ele) return null;
   while (
     ele!.getAttribute &&
@@ -7,6 +10,9 @@ export const getAttributeNode = (ele: HTMLElement | null, attribute: string):HTM
   ) {
     // eslint-disable-next-line no-param-reassign
     ele = ele!.parentNode;
+  }
+  if (ele === document.body) {
+    return null;
   }
   return ele;
 };

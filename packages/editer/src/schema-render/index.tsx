@@ -1,25 +1,17 @@
 import { usePrefix } from '@/hooks';
-import { getAttributeNode } from '@/utils';
-import {
-  FC,
-  memo,
-  ReactChildren,
-  ReactElement,
-  useEffect,
-  useRef,
-} from 'react';
+import { FC, memo, ReactChildren, ReactElement } from 'react';
 import CompRender, { CompRenderProps } from './CompRender';
-import Insertion from './Insertion';
+import Insertion from './Components/Insertion';
 import './index.less';
 export interface Schema {
   componentName: string;
-  id: string;
   props?: {
     children?: ReactChildren | string | ReactElement;
     [key: string]: any;
   };
   children?: Schema[] | string | number;
   [key: string]: any;
+  id:string
 }
 
 export type Install = CompRenderProps['install'];
@@ -62,7 +54,7 @@ const SchemaRender: FC<Props> = (props) => {
           );
         })}
       </div>
-      <Insertion canvasClassName={prefixCls}  />
+      <Insertion canvasClassName={prefixCls} />
     </>
   );
 };

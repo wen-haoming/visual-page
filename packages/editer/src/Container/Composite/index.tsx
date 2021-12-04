@@ -68,7 +68,7 @@ const Header = () => {
                   <DragItem
                     key={key.toString()}
                     title={val.componentNameCN}
-                    itemData={{ componentName: key, id: uid(), ...val }}
+                    itemData={{ ...val,componentName: key }}
                   />
                 );
               })}

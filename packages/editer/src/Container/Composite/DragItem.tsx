@@ -4,9 +4,10 @@ import { FC, memo } from 'react';
 import { useDrag } from 'react-dnd';
 import { Schema } from '@/schema-render';
 import { useStore } from '@/hooks';
+import { uid } from '@/utils';
 
 interface Props {
-  itemData: Schema;
+  itemData: Omit<Schema,'id'>;
   title: string;
 }
 
@@ -20,9 +21,10 @@ const DragItem: FC<Props> = (props) => {
       type: 'component',
       end(item, monitor) {
         if (monitor.didDrop()) {
-          const newItemData = { ...itemData };
+          const newItemData  = { ...itemData } as Schema;
           Reflect.deleteProperty(newItemData, 'comp');
           Reflect.deleteProperty(newItemData, 'componentNameCN');
+          newItemData.id = uid()
 
           changeSchema((schemeArr) => {
             return [...schemeArr, newItemData];
@@ -45,6 +47,7 @@ const DragItem: FC<Props> = (props) => {
         const newItemData = { ...itemData };
         Reflect.deleteProperty(newItemData, 'comp');
         Reflect.deleteProperty(newItemData, 'componentNameCN');
+        newItemData.id = uid()
 
         changeSchema((schemeArr) => {
           return [...schemeArr, newItemData];

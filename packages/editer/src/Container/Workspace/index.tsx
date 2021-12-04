@@ -7,13 +7,14 @@ import { install } from '../defaultSetting';
 import { useDrop } from 'react-dnd';
 import { useStore } from '@/hooks';
 import './index.less';
+import { TYPE_FLAG } from '@/schema-render/Components/Insertion';
 
 const Workspace = () => {
   const prefixCls = usePrefix('workspace');
   const { globalState } = useStore();
 
   const [, dropRef] = useDrop(() => ({
-    accept: 'component',
+    accept: ['component'],
     drop: () => ({ name: 'Dustbin' }),
     collect: (monitor) => {
       return {
@@ -24,8 +25,9 @@ const Workspace = () => {
     },
   }));
 
+
   return (
-    <div className={prefixCls}>
+    <div className={prefixCls} >
       <Space className={`${prefixCls}-h`}>
         <div className={`${prefixCls}-h-btn`}>
           <SwapLeftOutlined />
