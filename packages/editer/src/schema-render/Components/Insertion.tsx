@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef} from 'react';
-import { usePrefix } from '@/hooks';
+import { useEffect, useState, useRef } from 'react';
+import { usePrefix, useStore } from '@/hooks';
 import { FC, memo } from 'react';
 import { getAttributeNode } from '@/utils';
 import { DragOutlined } from '@ant-design/icons';
@@ -18,32 +18,29 @@ const Insertion: FC<Props> = (props) => {
   const { canvasClassName } = props;
   const prefixCls = usePrefix('insertion');
   const [currentDom, setCurrentDom] = useState<HTMLElement | null>(null);
-  const [dragEnd, setDragEnd] = useState(false);
+  const currentDomRef = useRef<HTMLElement | null>(null);
+  const { changeSchema } = useStore();
+
   const boxMenuRef = useRef<HTMLElement | null>();
 
   const [{ isDragging }, drag, preview] = useDrag({
     type: TYPE_FLAG,
     item(item) {
       return {
-        didDrop:item.didDrop(),
+        didDrop: item.didDrop(),
         dragFlag: MOVE_FLAG,
       };
     },
     collect: (monitor) => {
-        if( monitor.isDragging()){
-          setDragEnd(false)
-        }
-      return ({
-      isDragging: monitor.isDragging(),
-    })},
-    
-    end() {
-      setDragEnd(true) 
+      return {
+        isDragging: monitor.isDragging(),
+      };
     },
   });
 
   useEffect(() => {
     const canvasDom = document.querySelector(`.${canvasClassName}`);
+
     if (canvasDom) {
       const mousemove = (e: ElementEventMap['fullscreenchange']) => {
         const targetDom = e.target as HTMLElement;
@@ -58,27 +55,46 @@ const Insertion: FC<Props> = (props) => {
           const Node = getAttributeNode(targetDom, 'data-schema-id');
           if (Node) {
             setCurrentDom(Node);
+            currentDomRef.current = Node;
           }
         }
       };
       canvasDom.addEventListener('mousemove', mousemove, false);
-
       return () => {
         canvasDom.removeEventListener('mousemove', mousemove, false);
       };
     }
-  }, []);
+  }, [isDragging]);
 
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
   }, []);
 
+  const dropEndCb = (replaceNode: HTMLElement, dir: 'left' | 'right') => {
+    changeSchema((schemaArr) => {
+      const currentIdx = schemaArr.findIndex((item) => {
+        return (
+          item.id === currentDomRef.current?.getAttribute('data-schema-id')
+        );
+      });
+
+      const [replaceItem] = schemaArr.splice(currentIdx, 1);
+
+      let replaceIdx = schemaArr.findIndex(
+        (item) => item.id === replaceNode.getAttribute('data-schema-id'),
+      );
+
+      replaceIdx = dir === 'left' ? replaceIdx : replaceIdx + 1;
+
+      schemaArr.splice(replaceIdx, 0, replaceItem);
+
+      return [...schemaArr];
+    });
+  };
+
   return (
     <>
-      <DragCompBox
-      dragEnd={dragEnd}
-        currentDomId={currentDom?.getAttribute('data-schema-id') || ''}
-      />
+      <DragCompBox dropEndCb={dropEndCb} />
       {currentDom && (
         <>
           <div className={prefixCls}>

@@ -3,36 +3,34 @@ import { memo, useEffect, useCallback, useState, useRef } from 'react';
 import { usePrefix, useStore } from '@/hooks';
 import { MOVE_FLAG } from './Insertion';
 import './dragCompBox.less';
-import { getAttributeNode, judgePointAt } from '@/utils';
+import { getAttributeNode, judgePointAt, swap } from '@/utils';
 
-const DragLayer = (props: { currentDomId: string; dragEnd: boolean }) => {
-  const { currentDomId, dragEnd } = props;
+const DragLayer = (props: { dropEndCb: (node:HTMLElement,dir:'left' | 'right') => void }) => {
+  const { dropEndCb } = props;
   const prefixCls = usePrefix('drag-comp-box');
   const [styles, setStyles] = useState({});
-  const replaceDomRef = useRef<HTMLElement>();
-  const { changeSchema } = useStore();
+  const replaceDomRef = useRef<{ node?: HTMLElement; dir?: 'left' | 'right' }>(
+    {},
+  );
 
   const { isDragging } = useDragLayer((monitor) => {
     if ((monitor.getItem() || {}).dragFlag === MOVE_FLAG) {
       return {
         isDragging: monitor.isDragging(),
-        currentOffset: monitor.getSourceClientOffset(),
       };
     }
     return {};
   });
 
-  const dragover = useCallback((e: ElementEventMap['fullscreenchange']) => {
-    requestAnimationFrame(() => {
+  useEffect(() => {
+    const dragover = (e: ElementEventMap['fullscreenchange']) => {
       const Node = getAttributeNode(e.target as HTMLElement, 'data-schema-id');
       if (Node) {
         const { left, top, right } = Node.getBoundingClientRect();
 
         const dir = judgePointAt({
           offsetX: e.offsetX,
-          offsetY: e.offsetY,
           width: Node.offsetWidth,
-          height: Node.offsetHeight,
         });
 
         if (dir === 'left') {
@@ -42,9 +40,7 @@ const DragLayer = (props: { currentDomId: string; dragEnd: boolean }) => {
             left,
             top,
           });
-          if (Node.previousElementSibling) {
-            replaceDomRef.current = Node.previousElementSibling;
-          }
+          replaceDomRef.current = { node: Node, dir: 'left' };
         } else if (dir === 'right') {
           setStyles({
             width: 3,
@@ -52,47 +48,24 @@ const DragLayer = (props: { currentDomId: string; dragEnd: boolean }) => {
             left: right,
             top,
           });
-          if (Node.nextElementSibling) {
-            replaceDomRef.current = Node.nextElementSibling;
-          }
+          replaceDomRef.current = { node: Node, dir: 'right' };
         }
       }
-    });
+    };
+
+    const dragend = (e: ElementEventMap['fullscreenchange']) => {
+      const { node, dir } = replaceDomRef.current;
+      if (!node || !dir) return;
+      dropEndCb(node,dir)
+    };
+
+    document.addEventListener('dragover', dragover, false);
+    document.addEventListener('dragend', dragend);
+    return () => {
+      document.removeEventListener('dragover', dragover, false);
+      document.removeEventListener('dragend', dragend, false);
+    };
   }, []);
-
-  useEffect(() => {
-    if (dragEnd && currentDomId) {
-      if (!currentDomId) return;
-      changeSchema((schemaArr) => {
-        const replaceIdx = schemaArr.findIndex(
-          (item) =>
-            item.id === replaceDomRef.current?.getAttribute('data-schema-id'),
-        );
-
-        const previosIdx = schemaArr.findIndex(
-          (item) => item.id === currentDomId,
-        );
-        const replaceItem = schemaArr[replaceIdx];
-
-        console.log(replaceIdx, previosIdx);
-
-        // schemaArr[replaceIdx] = schemaArr[previosIdx];
-        // schemaArr[previosIdx] = replaceItem;
-
-        return [...schemaArr];
-      });
-    }
-  }, [dragEnd, currentDomId]);
-
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('dragover', dragover, false);
-      return () => {
-        document.removeEventListener('dragover', dragover, false);
-      };
-    } else {
-    }
-  }, [isDragging, currentDomId]);
 
   return <>{isDragging && <div className={prefixCls} style={styles}></div>}</>;
 };
