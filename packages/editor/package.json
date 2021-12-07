@@ -1,0 +1,30 @@
+{
+  "name": "@visual-page/editor",
+  "version": "0.0.1",
+  "main": "dist/editor.cjs.js",
+  "module": "dist/editor.esm.js",
+  "types": "dist/editor.d.ts",
+  "unpkg": "dist/editor.global.js",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-layout": "^6.5.0",
+    "ahooks": "^2.10.12",
+    "antd": "^4.17.2",
+    "classnames": "^2.3.1",
+    "react": "17.x",
+    "react-dnd": "^14.0.4",
+    "react-dnd-html5-backend": "^14.0.2",
+    "react-dom": "17.x"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
+  "buildOptions": {
+    "name": "@visual-page/editor",
+    "formats": [
+      "esm",
+      "cjs"
+    ]
+  }
+}

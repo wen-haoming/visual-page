@@ -1,0 +1,34 @@
+@import '../styles/variables.less';
+
+.@{prefix-cls}-workspace {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    &-h {
+        display: flex;
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid var(--vb-white-gray-lighter);
+        padding: 5px 10px;
+
+        &-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3px;
+            cursor: pointer;
+            border-radius: 2px;
+            font-size: 14px;
+
+            &:hover {
+                background-color: var(--vb-white-gray-lighter);
+            }
+        }
+    }
+    &-viewport{
+        position: relative;
+        flex:1;
+        border: 5px solid var(--vb-white-gray-lighter);
+        margin-bottom: 10px;
+    }
+}

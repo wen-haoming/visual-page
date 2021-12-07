@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": false,
+    "target": "es2016",
+    "module": "esnext",
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": "./",
+    "rootDir": ".",
+    "paths": {
+      "@visual-page/*": ["packages/*/src"]
+    }
+  },
+  "include": ["packages/**/src"]
+}

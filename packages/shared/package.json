@@ -1,0 +1,15 @@
+{
+  "name": "@visual-page/shared",
+  "version": "0.0.1",
+  "main":"dist/shared.cjs.js",
+  "module": "dist/shared.esm.js",
+  "types": "dist/shared.d.ts",
+  "unpkg": "dist/shared.global.js",
+  "buildOptions": {
+    "name": "@visual-page/shared",
+    "formats": [
+      "esm",
+      "cjs"
+    ]
+  }
+}
