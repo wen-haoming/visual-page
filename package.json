@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "visual-page",
   "scripts": {
-    "dev": "node scripts/dev.js"
+    "dev": "cd ./packages/visual-page && pnpm dev",
+    "build": "cd ./packages/visual-page && pnpm build"
   },
   "keywords": [],
   "author": "",
