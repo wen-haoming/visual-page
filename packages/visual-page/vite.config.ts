@@ -5,6 +5,7 @@ import Unocss from 'unocss/vite'
 import {presetWind} from 'unocss'
 // https://vitejs.dev/config/
 export default defineConfig({
+  base:'/visual-page/',
   plugins: [
     createStyleImportPlugin({ resolves: [AntdResolve()] }),
     Unocss({
